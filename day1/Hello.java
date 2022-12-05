@@ -1,3 +1,5 @@
+package day1;
+
 import java.util.Scanner;
 import java.lang.String;
 import java.lang.System;
