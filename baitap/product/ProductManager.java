@@ -81,9 +81,7 @@ public class ProductManager {
             for (int i = 0; i < products.length; i++) {
                 if (products[i].getCode().equals(code)) {
                     Product productDelete = products[i];
-                    for (int j = i; j < products.length - 1; j++) {
-                        products[j] = products[j + 1];
-                    }
+                    System.arraycopy(products, i + 1, products, i, products.length - i);
                     System.out.println("Xóa thành công sản phẩm!");
                     System.out.println(productDelete);
                     break;
