@@ -3,11 +3,11 @@ package baitap.product;
 import java.util.Scanner;
 
 public class ProductManager {
-    private Product[] products;
+    private Product[] productList;
     private static int INDEX = 0;
 
     public ProductManager() {
-        products = new Product[10];
+        productList = new Product[10];
     }
 
     private Product createProduct(Scanner scanner) {
@@ -23,8 +23,8 @@ public class ProductManager {
     }
 
     public void addProduct(Scanner scanner) {
-        if (INDEX < products.length) {
-            products[INDEX] = createProduct(scanner);
+        if (INDEX < productList.length) {
+            productList[INDEX] = createProduct(scanner);
             INDEX++;
         } else {
             System.out.println("Danh sách sản phẩm đã đầy!");
@@ -32,7 +32,7 @@ public class ProductManager {
     }
 
     private boolean checkExistByCode(String code) {
-        for (Product p : products) {
+        for (Product p : productList) {
             if (p != null) {
                 if (p.getCode().equals(code)) {
                     return true;
@@ -42,26 +42,28 @@ public class ProductManager {
         return false;
     }
 
+
+
     public void updateProductByCode(Scanner scanner) {
         System.out.println("Nhập mã sản phẩm muốn sửa: ");
         String code = scanner.nextLine();
         if (checkExistByCode(code)) {
-            for (Product p : products) {
+            for (Product p : productList) {
                 if (p.getCode().equals(code)) {
 //                    Product productUpdate = p;
                     System.out.println("Nhập tên mới cho sản phẩm: " + p.getName());
                     String name = scanner.nextLine();
-                    if (!name.equals("")) {
+                    if (isaBoolean(name)) {
                         p.setName(name);
                     }
                     System.out.println("Nhập giá mới cho sản phẩm: " + p.getPrice());
                     String price = scanner.nextLine();
-                    if (!price.equals("")) {
+                    if (isaBoolean(price)) {
                         p.setPrice(Double.parseDouble(price));
                     }
                     System.out.println("Nhập loại mới cho sản phẩm: " + p.getType());
                     String type = scanner.nextLine();
-                    if (!type.equals("")) {
+                    if (isaBoolean(type)) {
                         p.setType(type);
                     }
                     System.out.println("Sửa thành công!");
@@ -74,14 +76,18 @@ public class ProductManager {
         }
     }
 
+    private boolean isaBoolean(String string) {
+        return !string.equals("");
+    }
+
     public void deleteProductByCode(Scanner scanner) {
         System.out.println("Nhập mã sản phẩm muốn xóa: ");
         String code = scanner.nextLine();
         if (checkExistByCode(code)) {
-            for (int i = 0; i < products.length; i++) {
-                if (products[i].getCode().equals(code)) {
-                    Product productDelete = products[i];
-                    System.arraycopy(products, i + 1, products, i, products.length - i);
+            for (int i = 0; i < productList.length; i++) {
+                if (productList[i].getCode().equals(code)) {
+                    Product productDelete = productList[i];
+                    System.arraycopy(productList, i + 1, productList, i, productList.length - i);
                     System.out.println("Xóa thành công sản phẩm!");
                     System.out.println(productDelete);
                     break;
@@ -96,7 +102,7 @@ public class ProductManager {
         System.out.println("Nhập tên sản phẩm muốn tìm: ");
         String nameSearch = scanner.nextLine();
         boolean check = false;
-        for (Product p : products) {
+        for (Product p : productList) {
             if (p != null) {
                 if (p.getName().toLowerCase().contains(nameSearch.toLowerCase())) {
                     check = true;
@@ -111,7 +117,7 @@ public class ProductManager {
 
     public void displayAllProducts() {
         boolean check = false;
-        for (Product p : products) {
+        for (Product p : productList) {
             if (p != null) {
                 System.out.println(p);
                 check = true;

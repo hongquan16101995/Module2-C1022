@@ -11,4 +11,9 @@ public class Dog extends Animal{
     public void makeNoise() {
         System.out.println("Go go");
     }
+
+//    @Override
+//    public Plane m1() {
+//        return new Plane();
+//    }
 }

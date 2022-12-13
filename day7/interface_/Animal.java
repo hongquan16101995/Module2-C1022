@@ -12,4 +12,8 @@ public class Animal {
     public void makeNoise() {
         System.out.println("Can noise");
     }
+
+    protected final Vehicle m1() {
+        return new Vehicle();
+    }
 }
