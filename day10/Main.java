@@ -2,6 +2,7 @@ package day10;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,5 +49,7 @@ public class Main {
         integerLinkedList.add(100);
         integerLinkedList.add(1000);
         integerLinkedList.add(1, 5555);
+
+        List<Integer> a = new LinkedList<>();
     }
 }
