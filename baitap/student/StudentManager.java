@@ -1,5 +1,8 @@
 package baitap.student;
 
+import com.sun.corba.se.spi.orbutil.fsm.Input;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudentManager {
@@ -28,11 +31,21 @@ public class StudentManager {
     }
 
     private String choiceGender(Scanner scanner) {
+
         System.out.println("1. Male");
         System.out.println("2. Female");
         System.out.println("3. Other");
         System.out.println("Enter your choice: ");
-        int choice = Integer.parseInt(scanner.nextLine());
+        int choice = -1;
+        boolean check = true;
+        do {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                check = false;
+            } catch (InputMismatchException | IllegalArgumentException e) {
+                System.out.println("Sai định dạng, nhập lại!");
+            }
+        }while (check);
         switch (choice) {
             case 1:
                 return "Male";
@@ -41,6 +54,7 @@ public class StudentManager {
             default:
                 return "Other";
         }
+
     }
 
     public void addStudent(Scanner scanner) {
@@ -92,7 +106,7 @@ public class StudentManager {
             if (deleteIndex != -1) {
                 Student[] newStudent = new Student[students.length - 1];
                 System.arraycopy(students, 0, newStudent, 0, deleteIndex);
-                System.arraycopy(students, deleteIndex+1, newStudent, deleteIndex, students.length - 1 - deleteIndex);
+                System.arraycopy(students, deleteIndex + 1, newStudent, deleteIndex, students.length - 1 - deleteIndex);
                 students = newStudent;
             } else {
                 System.out.println("Not exist student have this name!");
