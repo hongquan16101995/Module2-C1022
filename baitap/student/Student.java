@@ -2,7 +2,9 @@ package baitap.student;
 
 import baitap.product.Product;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private static int ID_AUTO = 0;
     private int id;
     private String name;
